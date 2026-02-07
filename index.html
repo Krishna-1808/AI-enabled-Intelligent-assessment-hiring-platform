@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assessment Platform - Eliminate Fake Job Applications</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="models.py"/>
+    <link rel="stylesheet" href="_init_.py"/>
+     <link rel="stylesheet" href="app.py"/>
+      <link rel="stylesheet" href="config.py"/>
+       <link rel="stylesheet" href="ai_service.py"/>
+        <link rel="stylesheet" href="evaluation_service.py"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-robot"></i>
+                <span>AI<span class="highlight">Assess</span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-page="create">Create Assessment</a></li>
+                <li><a href="#" class="nav-link" data-page="candidate">Candidate Portal</a></li>
+                <li><a href="#" class="nav-link" data-page="leaderboard">Leaderboard</a></li>
+                <li><a href="#" class="nav-link" data-page="reports">Reports</a></li>
+            </ul>
+            <div class="nav-auth">
+                <button class="btn-login" id="loginBtn">Login</button>
+                <button class="btn-signup" id="signupBtn">Sign Up</button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        <!-- Home Page -->
+        <section id="home-page" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 class="animate__animated animate__fadeInDown">AI-Powered Assessment Platform</h1>
+                    <p class="subtitle animate__animated animate__fadeInUp">Eliminate fake applications, hire genuine talent</p>
+                    <p class="description">Automatically generate role-specific assessments, evaluate candidates fairly, and reduce screening overhead by 80%.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary btn-lg" id="getStartedBtn">
+                            Get Started <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn-outline btn-lg" id="watchDemoBtn">
+                            <i class="fas fa-play-circle"></i> Watch Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image animate__animated animate__fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="AI Assessment Platform">
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <section class="features">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI-Powered JD Analysis</h3>
+                        <p>Automatically parse job descriptions and extract required skills, experience level, and competencies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Smart Question Generation</h3>
+                        <p>Generate MCQs, coding challenges, and subjective questions tailored to specific job roles.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Anti-Fake Detection</h3>
+                        <p>Identify and filter out fake applications, resume mismatches, and bot-driven submissions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Detailed Analytics</h3>
+                        <p>Get comprehensive reports with skill gap analysis, strengths, weaknesses, and benchmarking.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section class="how-it-works">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Upload Job Description</h3>
+                        <p>Paste or upload your job description. Our AI analyzes requirements.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Generate Assessment</h3>
+                        <p>AI creates a balanced assessment with MCQs, coding, and subjective questions.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Candidates Take Assessment</h3>
+                        <p>Candidates complete time-based assessments with anti-cheating measures.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Get Results & Leaderboard</h3>
+                        <p>Receive detailed scores, rankings, and analytics for informed hiring.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section id="dashboard-page" class="page">
+            <div class="dashboard-header">
+                <h2><i class="fas fa-tachometer-alt"></i> Recruiter Dashboard</h2>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #4CAF50;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-candidates">245</h3>
+                            <p>Total Candidates</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #2196F3;">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-assessments">189</h3>
+                            <p>Assessments Taken</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #FF9800;">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="active-jobs">12</h3>
+                            <p>Active Jobs</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #9C27B0;">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="avg-score">78%</h3>
+                            <p>Avg. Score</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="dashboard-main">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Assessments</h3>
+                            <button class="btn-small">View All</button>
+                        </div>
+                        <div class="card-body">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Candidate</th>
+                                        <th>Job Role</th>
+                                        <th>Score</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-assessments">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="quick-actions">
+                                <button class="quick-action-btn" id="createAssessmentBtn">
+                                    <i class="fas fa-plus-circle"></i>
+                                    <span>Create New Assessment</span>
+                                </button>
+                                <button class="quick-action-btn">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Upload Candidates</span>
+                                </button>
+                                <button class="quick-action-btn">
+                                    <i class="fas fa-download"></i>
+                                    <span>Export Reports</span>
+                                </button>
+                                <button class="quick-action-btn">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-sidebar">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Upcoming Deadlines</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="deadlines-list">
+                                <!-- Data will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Top Performers</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="top-performers">
+                                <!-- Data will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Create Assessment Page -->
+        <section id="create-page" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-plus-circle"></i> Create New Assessment</h2>
+                <p>AI-powered assessment generation based on job description</p>
+            </div>
+
+            <div class="create-container">
+                <div class="create-stepper">
+                    <div class="step active" data-step="1">
+                        <div class="step-circle">1</div>
+                        <div class="step-label">Job Details</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-circle">2</div>
+                        <div class="step-label">Skills & Requirements</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-circle">3</div>
+                        <div class="step-label">Assessment Settings</div>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-circle">4</div>
+                        <div class="step-label">Preview & Generate</div>
+                    </div>
+                </div>
+
+                <div class="step-content" id="step-content">
+                    <!-- Step 1: Job Details -->
+                    <div class="step-panel active" data-step="1">
+                        <div class="form-group">
+                            <label for="jobTitle"><i class="fas fa-heading"></i> Job Title</label>
+                            <input type="text" id="jobTitle" placeholder="e.g., Full Stack Developer, Data Analyst">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobDescription"><i class="fas fa-file-alt"></i> Job Description</label>
+                            <textarea id="jobDescription" rows="10" placeholder="Paste the complete job description here..."></textarea>
+                            <div class="form-hint">AI will analyze this to extract skills and requirements</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="experienceLevel"><i class="fas fa-user-tie"></i> Experience Level</label>
+                            <select id="experienceLevel">
+                                <option value="fresher">Fresher (0-2 years)</option>
+                                <option value="junior">Junior (2-4 years)</option>
+                                <option value="mid" selected>Mid-Level (4-7 years)</option>
+                                <option value="senior">Senior (7+ years)</option>
+                                <option value="lead">Lead/Architect</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-primary" id="analyzeJD">
+                                <i class="fas fa-robot"></i> Analyze with AI
+                            </button>
+                            <button class="btn-outline" id="nextStep1">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Skills & Requirements -->
+                    <div class="step-panel" data-step="2">
+                        <div class="skills-section">
+                            <h3><i class="fas fa-cogs"></i> Extracted Skills</h3>
+                            <div class="skills-container" id="skillsContainer">
+                                <!-- Skills will be populated by AI analysis -->
+                            </div>
+                            <div class="form-group">
+                                <label>Add Custom Skills</label>
+                                <div class="skill-input-group">
+                                    <input type="text" id="customSkill" placeholder="Enter skill (e.g., React.js, AWS)">
+                                    <button class="btn-small" id="addSkillBtn"><i class="fas fa-plus"></i> Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-outline" id="prevStep2">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button class="btn-primary" id="nextStep2">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Assessment Settings -->
+                    <div class="step-panel" data-step="3">
+                        <div class="settings-grid">
+                            <div class="form-group">
+                                <label><i class="fas fa-clock"></i> Assessment Duration</label>
+                                <select id="assessmentDuration">
+                                    <option value="1800">30 minutes</option>
+                                    <option value="3600" selected>60 minutes</option>
+                                    <option value="5400">90 minutes</option>
+                                    <option value="7200">120 minutes</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-sliders-h"></i> Difficulty Level</label>
+                                <select id="difficultyLevel">
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-percentage"></i> Passing Score (%)</label>
+                                <input type="number" id="passingScore" min="0" max="100" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-question-circle"></i> Total Questions</label>
+                                <input type="number" id="totalQuestions" min="5" max="50" value="15">
+                            </div>
+                        </div>
+                        
+                        <div class="question-distribution">
+                            <h3><i class="fas fa-chart-pie"></i> Question Distribution</h3>
+                            <div class="distribution-sliders">
+                                <div class="slider-group">
+                                    <label>MCQ Questions: <span id="mcqPercent">40</span>%</label>
+                                    <input type="range" id="mcqSlider" min="0" max="100" value="40">
+                                </div>
+                                <div class="slider-group">
+                                    <label>Coding Questions: <span id="codingPercent">30</span>%</label>
+                                    <input type="range" id="codingSlider" min="0" max="100" value="30">
+                                </div>
+                                <div class="slider-group">
+                                    <label>Subjective Questions: <span id="subjectivePercent">30</span>%</label>
+                                    <input type="range" id="subjectiveSlider" min="0" max="100" value="30">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn-outline" id="prevStep3">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button class="btn-primary" id="nextStep3">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Preview & Generate -->
+                    <div class="step-panel" data-step="4">
+                        <div class="preview-container">
+                            <h3><i class="fas fa-eye"></i> Assessment Preview</h3>
+                            <div class="preview-card">
+                                <div class="preview-header">
+                                    <h4 id="previewJobTitle">Full Stack Developer Assessment</h4>
+                                    <div class="preview-meta">
+                                        <span><i class="fas fa-clock"></i> <span id="previewDuration">60</span> minutes</span>
+                                        <span><i class="fas fa-question-circle"></i> <span id="previewQuestions">15</span> questions</span>
+                                        <span><i class="fas fa-percentage"></i> <span id="previewPassingScore">70</span>% to pass</span>
+                                    </div>
+                                </div>
+                                <div class="preview-skills">
+                                    <h5>Skills Tested:</h5>
+                                    <div class="skill-tags" id="previewSkills">
+                                        <!-- Skills will be populated -->
+                                    </div>
+                                </div>
+                                <div class="preview-breakdown">
+                                    <h5>Question Breakdown:</h5>
+                                    <div class="breakdown-stats">
+                                        <div class="breakdown-item">
+                                            <div class="breakdown-label">MCQ</div>
+                                            <div class="breakdown-bar">
+                                                <div class="bar-fill" style="width: 40%; background: #4CAF50;"></div>
+                                            </div>
+                                            <div class="breakdown-value">40%</div>
+                                        </div>
+                                        <div class="breakdown-item">
+                                            <div class="breakdown-label">Coding</div>
+                                            <div class="breakdown-bar">
+                                                <div class="bar-fill" style="width: 30%; background: #2196F3;"></div>
+                                            </div>
+                                            <div class="breakdown-value">30%</div>
+                                        </div>
+                                        <div class="breakdown-item">
+                                            <div class="breakdown-label">Subjective</div>
+                                            <div class="breakdown-bar">
+                                                <div class="bar-fill" style="width: 30%; background: #FF9800;"></div>
+                                            </div>
+                                            <div class="breakdown-value">30%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-outline" id="prevStep4">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button class="btn-primary" id="generateAssessment">
+                                <i class="fas fa-magic"></i> Generate Assessment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Candidate Assessment Page -->
+        <section id="candidate-page" class="page">
+            <div class="assessment-container">
+                <!-- Timer Display -->
+                <div class="assessment-timer" id="timer">
+                    <div class="timer-display">
+                        <i class="fas fa-clock"></i>
+                        <span id="timeRemaining">60:00</span>
+                    </div>
+                    <div class="timer-progress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+
+                <!-- Question Navigation -->
+                <div class="question-nav">
+                    <div class="nav-info">
+                        <span id="currentQuestion">1</span> of <span id="totalQuestionCount">15</span>
+                    </div>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" id="prevQuestion">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <button class="nav-btn" id="nextQuestion">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Questions Container -->
+                <div class="questions-container" id="questionsContainer">
+                    <!-- Questions will be loaded here -->
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <div class="warning-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Once submitted, you cannot change your answers. Ensure you've completed all questions.</p>
+                    </div>
+                    <button class="btn-primary btn-lg" id="submitAssessment">
+                        <i class="fas fa-paper-plane"></i> Submit Assessment
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Page -->
+        <section id="leaderboard-page" class="page">
+            <div class="leaderboard-header">
+                <h2><i class="fas fa-trophy"></i> Assessment Leaderboard</h2>
+                <div class="filter-controls">
+                    <select id="jobFilter">
+                        <option value="all">All Jobs</option>
+                        <option value="fullstack">Full Stack Developer</option>
+                        <option value="data-analyst">Data Analyst</option>
+                        <option value="devops">DevOps Engineer</option>
+                    </select>
+                    <select id="dateFilter">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month" selected>This Month</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="leaderboard-container">
+                <!-- Top 3 Winners -->
+                <div class="top-winners">
+                    <div class="winner-card second">
+                        <div class="winner-rank">2</div>
+                        <div class="winner-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="winner-info">
+                            <h4>Jane Smith</h4>
+                            <p class="winner-score">94.5%</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="winner-card first">
+                        <div class="winner-rank">1</div>
+                        <div class="winner-avatar">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="winner-info">
+                            <h4>John Doe</h4>
+                            <p class="winner-score">98.2%</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="winner-card third">
+                        <div class="winner-rank">3</div>
+                        <div class="winner-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="winner-info">
+                            <h4>Mike Johnson</h4>
+                            <p class="winner-score">91.7%</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Spring</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Full Leaderboard -->
+                <div class="leaderboard-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Candidate</th>
+                                <th>Score</th>
+                                <th>Time Taken</th>
+                                <th>Accuracy</th>
+                                <th>Skills</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results/Reports Page -->
+        <section id="reports-page" class="page">
+            <div class="reports-header">
+                <h2><i class="fas fa-chart-bar"></i> Detailed Assessment Reports</h2>
+                <div class="report-controls">
+                    <input type="text" placeholder="Search candidate..." id="searchCandidate">
+                    <button class="btn-outline"><i class="fas fa-download"></i> Export All</button>
+                </div>
+            </div>
+
+            <div class="reports-container">
+                <!-- Candidate Report Card -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div>
+                                <h3>John Doe</h3>
+                                <p>Applied for: Full Stack Developer</p>
+                                <p>Assessment Date: Oct 15, 2023</p>
+                            </div>
+                        </div>
+                        <div class="overall-score">
+                            <div class="score-circle">
+                                <svg width="120" height="120">
+                                    <circle class="bg-circle" cx="60" cy="60" r="54"></circle>
+                                    <circle class="progress-circle" cx="60" cy="60" r="54" style="stroke-dasharray: 339.292; stroke-dashoffset: 67.8584;"></circle>
+                                </svg>
+                                <div class="score-text">85%</div>
+                            </div>
+                            <div class="score-status passed">PASSED</div>
+                        </div>
+                    </div>
+
+                    <div class="report-content">
+                        <!-- Section Scores -->
+                        <div class="section-scores">
+                            <h4>Section-wise Performance</h4>
+                            <div class="score-bars">
+                                <div class="score-bar">
+                                    <div class="bar-label">MCQ</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 92%; background: #4CAF50;"></div>
+                                    </div>
+                                    <div class="bar-value">92%</div>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="bar-label">Coding</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 78%; background: #2196F3;"></div>
+                                    </div>
+                                    <div class="bar-value">78%</div>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="bar-label">Subjective</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 85%; background: #FF9800;"></div>
+                                    </div>
+                                    <div class="bar-value">85%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Analysis -->
+                        <div class="skills-analysis">
+                            <h4>Skills Analysis</h4>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <div class="skill-name">JavaScript</div>
+                                    <div class="skill-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 90%;"></div>
+                                        </div>
+                                        <span class="skill-percentage">90%</span>
+                                    </div>
+                                    <div class="skill-status excellent">Excellent</div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">React.js</div>
+                                    <div class="skill-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 85%;"></div>
+                                        </div>
+                                        <span class="skill-percentage">85%</span>
+                                    </div>
+                                    <div class="skill-status good">Good</div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">Node.js</div>
+                                    <div class="skill-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 80%;"></div>
+                                        </div>
+                                        <span class="skill-percentage">80%</span>
+                                    </div>
+                                    <div class="skill-status good">Good</div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-name">Database Design</div>
+                                    <div class="skill-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 70%;"></div>
+                                        </div>
+                                        <span class="skill-percentage">70%</span>
+                                    </div>
+                                    <div class="skill-status average">Average</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strengths & Weaknesses -->
+                        <div class="strengths-weaknesses">
+                            <div class="strengths">
+                                <h4><i class="fas fa-thumbs-up"></i> Strengths</h4>
+                                <ul>
+                                    <li>Strong problem-solving skills in algorithms</li>
+                                    <li>Excellent understanding of React concepts</li>
+                                    <li>Good code optimization practices</li>
+                                </ul>
+                            </div>
+                            <div class="weaknesses">
+                                <h4><i class="fas fa-exclamation-circle"></i> Areas for Improvement</h4>
+                                <ul>
+                                    <li>System design knowledge needs improvement</li>
+                                    <li>Could optimize database queries better</li>
+                                    <li>Needs more practice with async programming</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Plagiarism Check -->
+                        <div class="plagiarism-check">
+                            <h4><i class="fas fa-search"></i> Plagiarism Detection</h4>
+                            <div class="plagiarism-result">
+                                <div class="plagiarism-score">
+                                    <span class="score-indicator low">Low Risk (5%)</span>
+                                </div>
+                                <p>No significant plagiarism detected. Answers show original thinking.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-footer">
+                        <button class="btn-outline"><i class="fas fa-download"></i> Download Report</button>
+                        <button class="btn-primary"><i class="fas fa-user-check"></i> Shortlist Candidate</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-sign-in-alt"></i> Login</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                <button class="btn-primary btn-block">Login</button>
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                <p class="text-center">Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Create Account</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="signupCompany">Company Name</label>
+                    <input type="text" id="signupCompany" placeholder="Your company">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Work Email</label>
+                    <input type="email" id="signupEmail" placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="agreeTerms">
+                    <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+                <button class="btn-primary btn-block">Create Account</button>
+                <p class="text-center">Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assessment Generated Modal -->
+    <div class="modal" id="assessmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-check-circle"></i> Assessment Created!</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4>Full Stack Developer Assessment</h4>
+                <p>Your AI-generated assessment is ready!</p>
+                <div class="assessment-details">
+                    <div class="detail-item">
+                        <i class="fas fa-hashtag"></i>
+                        <span>Assessment ID: <strong>ASS-20231015-ABCD123</strong></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>15 questions generated</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>60 minutes duration</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-link"></i>
+                        <span>Shareable Link: <code>https://ai-assess.com/assessment/ASS-20231015-ABCD123</code></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-outline"><i class="fas fa-copy"></i> Copy Link</button>
+                    <button class="btn-primary"><i class="fas fa-eye"></i> Preview Assessment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <i class="fas fa-robot"></i>
+                    <span>AI<span class="highlight">Assess</span></span>
+                </div>
+                <p>AI-powered assessment platform to eliminate fake job applications and hire genuine talent.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Use Cases</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">GDPR Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AIAssess. All rights reserved. | Made by Krishna and Kavy for better hiring</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+     <script src="script.js"></script>
+     <script src="js/assessmentAPI.js"></script>
+      <script src="js/assessmentUI.js"></script>
+       <script src="js/assessmentEngine.js"></script>
+        <script src="js/questionBank.js"></script>
+     <script src="js/app.js"></script>
+     <script src="js/api.js"></script>
+    <script src="js/CandidateAssessment.js"></script>
+    <script src="js/Results.js"></script>
+</body>
+</html>
